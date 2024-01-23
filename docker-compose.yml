@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+    node:
+        container_name: project-api-node
+        image: 'node:latest'
+        working_dir: /home/node/app/backend
+        command:
+            - /bin/sh
+            - '-c'
+            - 'npm install && npm start'
+        ports:
+            - '3000:3000'
+        volumes:
+            - './src:/home/node/app/backend'
+        links:
+            - mongo
+    mongo:
+        container_name: project-api-mongo
+        image: 'mongo:latest'
+        ports:
+            - '27017:27017'

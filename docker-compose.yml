@@ -1,9 +1,11 @@
 version: '3.3'
 services:
     node:
-        container_name: project-api-node
+        container_name: project-api-music-share
         image: 'node:latest'
         working_dir: /home/node/app/backend
+        env_file:
+            - .env
         command:
             - /bin/sh
             - '-c'
@@ -11,7 +13,7 @@ services:
         ports:
             - '3000:3000'
         volumes:
-            - './src:/home/node/app/backend'
+            - './backend:/home/node/app/backend'
         links:
             - mongo
     mongo:
@@ -19,3 +21,8 @@ services:
         image: 'mongo:latest'
         ports:
             - '27017:27017'
+        volumes:
+            - 'mongo-data:/data/db'
+
+volumes:
+    mongo-data:

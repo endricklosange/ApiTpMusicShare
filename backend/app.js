@@ -13,6 +13,9 @@ server.use(express.json());
 const userRoute = require("./routes/userRoute");
 userRoute(server);
 
+const musicRoute = require("./routes/musicRoute");
+musicRoute(server);
+
 server.listen(port, hostname, () => {
     console.log(`Example app listening on ${hostname} port ${port}`)
 });

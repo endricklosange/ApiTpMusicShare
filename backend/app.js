@@ -16,6 +16,9 @@ userRoute(server);
 const musicRoute = require("./routes/musicRoute");
 musicRoute(server);
 
+const sessionRoute = require("./routes/sessionRoute");
+sessionRoute(server);
+
 server.listen(port, hostname, () => {
     console.log(`Example app listening on ${hostname} port ${port}`)
 });

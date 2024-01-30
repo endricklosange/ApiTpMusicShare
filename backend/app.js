@@ -19,6 +19,9 @@ musicRoute(server);
 const sessionRoute = require("./routes/sessionRoute");
 sessionRoute(server);
 
+const voteRoute = require("./routes/voteRoute");
+voteRoute(server);
+
 server.listen(port, hostname, () => {
     console.log(`Example app listening on ${hostname} port ${port}`)
 });

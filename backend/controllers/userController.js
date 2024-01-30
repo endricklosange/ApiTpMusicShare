@@ -47,3 +47,18 @@ exports.userLogin = async (req, res) => {
         res.status(500).json({ message: "Une erreur s'est produite lors du traitement" });
     }
 };
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({}, { password: 0 }); // Exclude password from the results
+
+        if (!users || users.length === 0) {
+            res.status(404).json({ message: "Aucun utilisateur trouvé" });
+            return;
+        }
+
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Une erreur s'est produite lors de la récupération des utilisateurs" });
+    }
+};

@@ -20,7 +20,6 @@ exports.createAVotingSession = async (req, res) => {
 
         res.status(201).json(votingSession);
     } catch (error) {
-        console.log(error);
         res.status(401).json({ message: "Requête invalide." });
     }
 };

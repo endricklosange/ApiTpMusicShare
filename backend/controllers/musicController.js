@@ -1,42 +1,40 @@
 const Music = require('../models/musicModel');
+const Session = require('../models/sessionModel');
 
-exports.createAMusic = (req, res) => {
+exports.createAMusic = async (req, res) => {
+    try {
+        const session = await Session.findById(req.body.id_voting_session);
 
-    Session.findById(req.params.session_id, (error, session) => {
-        if (error) {
-            res.status(401);
-            console.log(error);
-            res.json({ message: "Requête invalide." });
-        } else {
-            let newMusic = new Music({ ...req.body, session_id: req.params.session_id });
-
-            newMusic.save((error, music) => {
-                if (error) {
-                    res.status(401);
-                    console.log(error);
-                    res.json({ message: "Requête invalide." });
-                } else {
-                    res.status(201);
-                    res.json(music);
-                }
-            });
+        if (!session) {
+            return res.status(401).json({ message: "Session invalide." });
         }
 
-    });
-    
+        const newMusic = new Music({ ...req.body, id_voting_session: req.body.id_voting_session });
+        const music = await newMusic.save();
+
+        res.status(201).json({ message: "Musique créée avec succès.", music });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur serveur." });
+    }
 };
 
-exports.listAllMusics = (req, res) => {
-    // Remplacez 'session_id' par le nom de votre champ d'identifiant de session
-    Music.find({ session_id: req.params.session_id }, (error, musics) => {
-        if (error) {
-            res.status(500);
-            console.log(error);
-            res.json({ message: "Erreur serveur." });
-        } else {
-            res.status(200);
-            res.json(musics);
-        }
-    });
+exports.listAllMusics = async (req, res) => {
+    try {
+        const musics = await Music.find({ id_voting_session: req.params.id_voting_session });
+
+        res.status(200).json({ musics });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur serveur." });
+    }
+};
+
+exports.findAll = async (req, res) => {
+    try {
+        const musics = await Music.find();
+
+        res.status(200).json({ message: "Toutes les musiques récupérées avec succès.", musics });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur serveur." });
+    }
 };
 

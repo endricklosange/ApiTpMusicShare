@@ -3,8 +3,8 @@ module.exports = (server) => {
     const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
     server.route("/vote/:session_id")
-        .post(jwtMiddleware.verifyToken, voteController.voteForMusicInSession);
+        .post(voteController.voteForMusicInSession);
 
-    server.route("/get-vote-results/:session_id")
-        .get(jwtMiddleware.verifyToken, voteController.getVoteResultsForSession);
+    server.route("/vote/:session_id")
+        .get(voteController.getVoteResultsForSession);
 };

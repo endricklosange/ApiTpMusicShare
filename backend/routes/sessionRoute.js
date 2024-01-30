@@ -3,8 +3,9 @@ module.exports = (server) => {
     const jwtMiddleware = require("../middlewares/jwtMiddleware");
 
     server.route("/session")
-        .post(jwtMiddleware.verifyToken, sessionController.createAVotingSession);
+        .post(sessionController.createAVotingSession)
+        .get(sessionController.listAllVotingSessions)
 
-    server.route("/session/:session_id")
+    server.route("/session/:id_voting_session")
         .get(sessionController.getAVotingSession)
 };

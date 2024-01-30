@@ -3,4 +3,5 @@ module.exports = (server) => {
     
     server.post("/users/register", userController.userRegister);
     server.post("/users/login", userController.userLogin);
+    server.get("/users/", userController.getAllUsers);
 }

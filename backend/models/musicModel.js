@@ -13,6 +13,10 @@ let musicSchema = new Schema({
     music_url: {
         type: String,
         required: true,
+    },
+    id_voting_session: {
+        type: String,
+        required: true
     }
 });
 

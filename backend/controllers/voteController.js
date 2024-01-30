@@ -14,9 +14,9 @@ exports.voteForMusicInSession = async (req, res) => {
         }
 
         // Vérifier si la musique existe dans la session
-        const musicInSession = await Music.findOne({ _id: music_id, session_id: req.params.session_id });
-
+        const musicInSession = await Music.findOne({ _id: music_id, session_id: req.body.session_id });
         if (!musicInSession) {
+            console.log(musicInSession);
             res.status(404).json({ message: "La musique n'existe pas dans la session spécifiée." });
             return;
         }
@@ -38,7 +38,7 @@ exports.voteForMusicInSession = async (req, res) => {
 
 exports.getVoteResultsForSession = async (req, res) => {
     try {
-        const session_id = req.params.session_id;
+        const session_id = req.body.session_id;
 
         // Récupérer tous les votes pour la session spécifiée
         const votes = await Vote.find({ music_id: { $in: await Music.find({ session_id }) } });
@@ -53,7 +53,7 @@ exports.getVoteResultsForSession = async (req, res) => {
             totalRating += vote.rating;
             totalVotes++;
         });
-
+        console.log(votes);
         const averageRating = totalVotes > 0 ? totalRating / totalVotes : 0;
 
         res.status(200).json({ session_id, totalVotes, averageRating });

@@ -4,6 +4,9 @@ Welcome to this exciting project! To get started, follow these simple instructio
 Prerequisites
 Make sure you have Docker installed on your machine before proceeding.
 
+Setting Up Environment Variables
+Create a .env file in the project's root based on the structure of the .env.sample file. This file will contain sensitive information and configuration settings required for the application to run. Ensure that you provide appropriate values for each variable.
+
 Launching the Project
 Open your terminal and navigate to the project's root.
 Use the following command to launch the project with Docker Compose:

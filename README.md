@@ -1,5 +1,4 @@
 Project Readme
-Welcome to this exciting project! To get started, follow these simple instructions to launch the project and run tests.
 
 Prerequisites
 Make sure you have Docker installed on your machine before proceeding.
